@@ -7,7 +7,7 @@ const dotenv=require('dotenv');
 const authRoutes=require('./routes/auth');
 const student=require('./routes/student')
 dotenv.config();
-
+const scheduleCFdatasync =require('./services/codeforcessync')
 app.use(cors());
 app.use(express.json());
 const connectDb=async()=>{
@@ -20,6 +20,7 @@ const connectDb=async()=>{
  }
 }
 connectDb();
+scheduleCFdatasync();
 app.use('/api/auth',authRoutes);
 app.use('/api/student',student)
 const PORT =process.env.PORT || 5000;

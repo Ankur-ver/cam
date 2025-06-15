@@ -37,6 +37,14 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+router.put('/:id/reminders',async(req,res)=>{
+  const {disabled}=req.body;
+  const student=await Student.findById(req.params.id);
+  if(!student)return res.status(404).send("student not found");
+  student.inactivityReminders.disabled=disabled;
+  await student.save();
+  res.send({success:true});
+})
 router.put('/:id', async (req, res) => {
   try {
     const student = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true });
