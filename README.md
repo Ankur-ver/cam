@@ -46,7 +46,9 @@ A modern, full-stack application for managing student records with real-time Cod
 ### Homepage
 ![Homepage](./Screenshot 2025-06-16 180818.png)
 
+### 🔗 Demo Video
 
+[Watch Demo on Google Drive]([https://drive.google.com/your-video-link](https://drive.google.com/file/d/1lXPL-d4eVjnBplSMPz_VNweTDuj70a1X/view?usp=sharing))
 ---
 
 ## 🧑‍💻 Installation & Setup
