@@ -43,8 +43,8 @@ A modern, full-stack application for managing student records with real-time Cod
 
 ## 📷 Screenshots
 
-| Home Page | Student Table | Profile Page |
-|-----------|----------------|---------------|
+### Homepage
+![Homepage](./Screenshot 2025-06-16 180818.png)
 
 
 ---
