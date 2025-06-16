@@ -1,4 +1,4 @@
-
+/*Signup page */
 'use client';
 
 import { useState } from "react";
@@ -12,7 +12,7 @@ export default function signup(){
  const [role,setrole]=useState('student');
  const [error,seterror]=useState('');
  const router=useRouter();
-
+{/*Signup Handle */}
  const handleSignup=async(e:React.FormEvent)=>{
    e.preventDefault();
    try {
@@ -22,6 +22,7 @@ export default function signup(){
     seterror(err.response?.data?.message || 'signup failed');
    }
  };
+ {/*Signup UI */}
  return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 via-white to-yellow-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <form onSubmit={handleSignup} className="bg-white dark:bg-gray-800 p-10 rounded-xl shadow-xl w-full max-w-md">

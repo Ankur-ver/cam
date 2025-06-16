@@ -1,16 +1,17 @@
+/* codeforces sync and inactivity reminder sent after inactive for last 7 days  */
+
 const cron = require('node-cron');
 const Student = require('../model/student');
 const { fetchCFData } = require('./codeforces');
+require("dotenv").config();
 const nodemailer = require('nodemailer');
-
 const transporter = nodemailer.createTransport({
-  service: "Gmail",
+  service: "gmail",
   auth: {
-    user: "ankurverma7707@gmail.com",
-    pass: "Ankur@7707" 
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   }
 });
-
 async function sendInactivityEmail(student) {
   await transporter.sendMail({
     from: "codeforces7707@gmail.com",
@@ -19,11 +20,10 @@ async function sendInactivityEmail(student) {
     html: `
       <p>Hi ${student.name},</p>
       <p>We noticed that you haven’t submitted any problems on Codeforces in the past 7 days.</p>
-      <p>Time to get back to the grind! 🚀</p>
+      <p>Time to get back to the grind!</p>
       <p>Good luck!</p>
     `,
   });
-
   if (!student.inactivityReminders) {
     student.inactivityReminders = {
       count: 0,
@@ -31,18 +31,15 @@ async function sendInactivityEmail(student) {
       disabled: false
     };
   }
-
   student.inactivityReminders.count += 1;
   student.inactivityReminders.lastReminder = new Date();
   await student.save();
 }
-
 function scheduleCFDataSync(cronTime = '0 2 * * *') {
   cron.schedule(
     cronTime,
     async () => {
-      console.log("⏳ Codeforces sync started...");
-
+      console.log("Codeforces sync started...");
       try {
         const students = await Student.find();
 
@@ -75,7 +72,6 @@ function scheduleCFDataSync(cronTime = '0 2 * * *') {
           } else {
             await student.save();
           }
-
           console.log(`Synced ${student.codeforcesHandle}`);
         }
       } catch (err) {

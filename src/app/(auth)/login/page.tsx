@@ -1,4 +1,4 @@
-
+/* Login page  */
 
 'use client';
 
@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
-
+  {/*Login handle*/}
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -24,12 +24,12 @@ export default function LoginPage() {
       setError(err.response?.data?.message || 'Login failed');
     }
   };
-
+ {/*Login UI */}
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <form onSubmit={handleLogin} className="bg-white dark:bg-gray-800 p-10 rounded-xl shadow-xl w-full max-w-md">
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800 dark:text-gray-100">Welcome Back 👋</h2>
-        <p className="text-sm text-center mb-6 text-gray-500 dark:text-gray-400">Login to access your dashboard</p>
+        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800 dark:text-gray-100">Welcome Back</h2>
+        <p className="text-sm text-center mb-6 text-gray-500 dark:text-gray-400">|Login cozi|</p>
         {error && <p className="text-red-500 mb-4 text-sm text-center">{error}</p>}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>

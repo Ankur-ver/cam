@@ -1,7 +1,11 @@
+//student routes
+
 const express=require('express');
 const router=express.Router();
 const Student=require('../model/student')
 const { fetchCFData } = require('../services/codeforces');
+
+//individual student get
 router.get('/:id', async (req, res) => {
   try {
     const student = await Student.findById(req.params.id);
@@ -10,6 +14,8 @@ router.get('/:id', async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
+//all student get
 router.get('/', async (req, res) => {
   try {
     const students = await Student.find();
@@ -18,6 +24,8 @@ router.get('/', async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
+//student data post  (form submmission data for student details)
 router.post('/', async (req, res) => {
   try {
     const { name, email, phone, codeforcesHandle } = req.body;
@@ -37,6 +45,8 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+//inactivity remainder update request for individual student
 router.put('/:id/reminders',async(req,res)=>{
   const {disabled}=req.body;
   const student=await Student.findById(req.params.id);
@@ -45,6 +55,8 @@ router.put('/:id/reminders',async(req,res)=>{
   await student.save();
   res.send({success:true});
 })
+
+// student data update request
 router.put('/:id', async (req, res) => {
   try {
     const student = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -54,7 +66,7 @@ router.put('/:id', async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-
+//student delete request
 router.delete('/:id', async (req, res) => {
   try {
     const student = await Student.findByIdAndDelete(req.params.id);

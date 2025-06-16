@@ -5,6 +5,86 @@
   --foreground: #171717;
 }
 
+.rotating-border-wrapper {
+  position: relative;
+  display: inline-block;
+  border-radius: 1rem;
+  padding: 2px; 
+  background: transparent;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.rotating-border-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  overflow:hidden;
+  width: 300px;
+  height:200px; 
+  left:-58px;
+  top:-70px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg, #ec4899, #06b6d4, #8b5cf6, #ec4899);
+  animation: spin 3s linear infinite;
+  z-index: 0;
+}
+
+.rotating-border-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: 0.75rem;
+  padding: 1rem 1.2rem;
+}
+
+.rotating-border-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  z-index: 1;
+}
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease forwards;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}
+
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,12 +92,14 @@
   --font-mono: var(--font-geist-mono);
 }
 
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+
 
 body {
   background: var(--background);

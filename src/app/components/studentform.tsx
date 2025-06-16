@@ -1,4 +1,4 @@
-
+/*  Student form */
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from 'react';
@@ -36,7 +36,7 @@ export default function StudentForm({ onSuccess }: StudentFormProps) {
   e.preventDefault();
    console.log("hello ankur")
   try {
-    const res = await axios.post('http://localhost:5000/api/student', formData);
+    const res = await axios.post('http://localhost:5000/api/student', formData);     //API hit to add data for student
     console.log(res.data);
     const savedStudent = res.data;
     router.push(`/dashboard/${savedStudent._id}`);

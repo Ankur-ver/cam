@@ -1,8 +1,12 @@
+//auth routes
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
+
+//signup route 
 router.post('/signup', async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -20,7 +24,7 @@ router.post('/signup', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
+//login route
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;

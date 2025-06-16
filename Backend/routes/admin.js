@@ -1,3 +1,5 @@
+//codefores sync route   [sync and update student details for all student at 2 AM daily]
+
 const express=require('express');
 const scheduleCFdatasync = require('../services/codeforcessync');
 const router=express.Router();

@@ -1,8 +1,9 @@
-const axios = require('axios');
+/*  codeforces data fetch */
 
+const axios = require('axios');
 function formatDateFromSeconds(seconds) {
   const date = new Date(seconds * 1000);
-  return date.toISOString().split('T')[0]; // YYYY-MM-DD
+  return date.toISOString().split('T')[0];
 }
 async function fetchCFData(handle) {
   try {
@@ -11,14 +12,12 @@ async function fetchCFData(handle) {
       axios.get(`https://codeforces.com/api/user.rating?handle=${handle}`),
       axios.get(`https://codeforces.com/api/user.status?handle=${handle}`),
     ]);
-
     const info = infoRes.data.result[0];
     const ratingHistory = ratingRes.data.result;
     const submissionsRaw = statusRes.data.result;
     const accepted = submissionsRaw.filter(s => s.verdict === 'OK');
     const solvedSet = new Set();
     const solvedProblems = [];
-
     accepted.forEach(sub => {
       const problemKey = `${sub.problem.contestId}-${sub.problem.index}`;
       if (!solvedSet.has(problemKey)) {
@@ -50,12 +49,11 @@ async function fetchCFData(handle) {
     const timeSpanDays =
       solvedProblems.length > 1
         ? Math.ceil(
-            (Math.max(...solvedProblems.map(p => p.creationTimeSeconds)) -
-              Math.min(...solvedProblems.map(p => p.creationTimeSeconds))) /
-              (60 * 60 * 24)
-          )
+          (Math.max(...solvedProblems.map(p => p.creationTimeSeconds)) -
+            Math.min(...solvedProblems.map(p => p.creationTimeSeconds))) /
+          (60 * 60 * 24)
+        )
         : 1;
-
     const avgRating = totalSolved ? totalRating / totalSolved : 0;
     const avgPerDay = totalSolved / timeSpanDays;
     const contestMap = {};
@@ -65,12 +63,10 @@ async function fetchCFData(handle) {
         contestMap[p.contestId].add(p.index);
       }
     });
-
     const contestHistory = ratingHistory.map(c => {
       const related = submissionsRaw.filter(s => s.contestId === c.contestId);
       const totalUniqueProblems = new Set(related.map(s => s.problem.index)).size;
       const solvedInContest = contestMap[c.contestId]?.size || 0;
-
       return {
         contestId: c.contestId,
         contestName: c.contestName,
@@ -82,7 +78,6 @@ async function fetchCFData(handle) {
         unsolvedCount: totalUniqueProblems - solvedInContest,
       };
     });
-
     return {
       currentRating: info.rating || 0,
       maxRating: info.maxRating || 0,

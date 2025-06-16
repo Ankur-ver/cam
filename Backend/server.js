@@ -1,4 +1,6 @@
-
+/*  
+   Main Server.js      [will maintain and modified to handle large no. of requests]
+*/
 const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
@@ -7,9 +9,13 @@ const dotenv=require('dotenv');
 const authRoutes=require('./routes/auth');
 const student=require('./routes/student')
 dotenv.config();
+
+//CF data fetch at 2 AM daily 
 const scheduleCFdatasync =require('./services/codeforcessync')
 app.use(cors());
 app.use(express.json());
+
+//MongoDb database connection
 const connectDb=async()=>{
  const mongouri=process.env.MONGO_URI;
  try{
@@ -21,6 +27,7 @@ const connectDb=async()=>{
 }
 connectDb();
 scheduleCFdatasync();
+
 app.use('/api/auth',authRoutes);
 app.use('/api/student',student)
 const PORT =process.env.PORT || 5000;
