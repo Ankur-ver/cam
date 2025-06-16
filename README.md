@@ -44,7 +44,7 @@ A modern, full-stack application for managing student records with real-time Cod
 ## 📷 Screenshots
 
 ### Homepage
-![Homepage](./Screenshot 2025-06-16 180818.png)
+![Homepage](./Screenshot%202025-06-16%20180818.png)
 
 ### 🔗 Demo Video
 
