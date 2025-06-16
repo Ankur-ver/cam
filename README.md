@@ -46,6 +46,8 @@ A modern, full-stack application for managing student records with real-time Cod
 
 ### Homepage
 ![Homepage](./Screenshot%202025-06-16%20180818.png)
+### Inactivity reminder email
+![Reminder email](./remainder-email.png)
 
 ### 🔗 Demo Video
 
