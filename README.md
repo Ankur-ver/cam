@@ -15,6 +15,7 @@ A modern, full-stack application for managing student records with real-time Cod
 - Fetches data directly from the [Codeforces API](https://codeforces.com/api/)
 - Shows latest contests and rating updates
 - Updates data automatically when a student is added
+- Sync all student data and update every student data everyday at 2AM
 
 ### 📧 Inactivity Email Notifications
 - Sends automated email reminders to inactive students
