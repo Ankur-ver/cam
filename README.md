@@ -55,7 +55,7 @@ A modern, full-stack application for managing student records with real-time Cod
 ---
 
 ## 🧑‍💻 Installation & Setup
-
+ Fork Repo
 1. **Clone the repo**
 ```bash
 git clone https://github.com/your-username/student-management-system.git
