@@ -65,7 +65,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchStudent = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/student/${id}`);       //API hit to individual data which consist of corressponding student codeforces data also
+        const res = await axios.get(`https://cozi.onrender.com/api/student/${id}`);       //API hit to individual data which consist of corressponding student codeforces data also
         setStudent(res.data);
       } catch (err) {
         console.error("Error fetching student:", err);
@@ -88,7 +88,7 @@ export default function Dashboard() {
     try {
       const updatedValue = !student?.inactivityReminders?.disabled;
       const res = await axios.put(
-        `http://localhost:5000/api/student/${id}/reminders`,                    //API hit to update reminders for inactivityremainder 
+        `https://cozi.onrender.com/api/student/${id}/reminders`,                    //API hit to update reminders for inactivityremainder 
         { disabled: updatedValue }
       );
       console.log(res.data);

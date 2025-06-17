@@ -24,7 +24,7 @@ export default function AdminDashboard() {
 
   const fetchStudents = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/student");     //API direct hit to all student fetches all stduents
+      const res = await axios.get("https://cozi.onrender.com/api/student");     //API direct hit to all student fetches all stduents
       setStudents(res.data);
     } catch (err) {
       console.error("Error fetching students:", err);
@@ -39,7 +39,7 @@ export default function AdminDashboard() {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:5000/api/student/${id}`);     //Fetch individual student
+      await axios.delete(`https://cozi.onrender.com/api/student/${id}`);     //Fetch individual student
       setStudents((prev) => prev.filter((s) => s._id !== id));
     } catch (err) {
       console.error("Delete error:", err);

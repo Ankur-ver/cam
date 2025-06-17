@@ -37,7 +37,7 @@ export default function StudentForm({ onSuccess }: StudentFormProps) {
   setLoading(true);
   setError('');
   try {
-    const res = await axios.post('http://localhost:5000/api/student', formData);
+    const res = await axios.post('https://cozi.onrender.com/api/student', formData);
     const savedStudent = res.data;
     if (onSuccess) onSuccess();
     router.push(`/dashboard/${savedStudent._id}`);

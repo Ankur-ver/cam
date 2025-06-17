@@ -5,6 +5,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AxiosError } from 'axios';
+
 import axios from 'axios';
 
 export default function LoginPage() {
@@ -16,7 +17,7 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const res = await axios.post('https://cozi.onrender.com/api/auth/login', { email, password });
       const { token, role } = res.data;
       localStorage.setItem('token', token);
       if (role === 'admin') router.push('/admin');

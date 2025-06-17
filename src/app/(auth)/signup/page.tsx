@@ -17,7 +17,7 @@ export default function Signup(){
  const handleSignup=async(e:React.FormEvent)=>{
    e.preventDefault();
    try {
-    await axios.post('http://localhost:5000/api/auth/signup',{email,password,name,role});
+    await axios.post('https://cozi.onrender.com/api/auth/signup',{email,password,name,role});
     router.push('/login');
    } catch (err:unknown) {
      const error = err as AxiosError<{ message?: string }>;
