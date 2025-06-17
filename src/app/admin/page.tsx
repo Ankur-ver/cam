@@ -1,4 +1,4 @@
-{/*Admin Dashboard page*/}
+/*Admin Dashboard page*/
 
 "use client";
 
