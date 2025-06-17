@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { AxiosError } from 'axios';
 import axios from 'axios';
 
 export default function LoginPage() {
@@ -20,8 +21,9 @@ export default function LoginPage() {
       localStorage.setItem('token', token);
       if (role === 'admin') router.push('/admin');
       else router.push('/student');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed');
+    } catch (err: unknown) {
+      const error = err as AxiosError<{ message?: string }>;
+      setError(error.response?.data?.message || 'Login failed');
     }
   };
  {/*Login UI */}

@@ -1,7 +1,7 @@
 /*  Student form */
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
@@ -34,16 +34,28 @@ export default function StudentForm({ onSuccess }: StudentFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
-   console.log("hello ankur")
+  setLoading(true);
+  setError('');
   try {
-    const res = await axios.post('http://localhost:5000/api/student', formData);     //API hit to add data for student
-    console.log(res.data);
+    const res = await axios.post('http://localhost:5000/api/student', formData);
     const savedStudent = res.data;
+    if (onSuccess) onSuccess();
     router.push(`/dashboard/${savedStudent._id}`);
-  } catch (error) {
-    console.error('Submission failed:', error);
+  } catch (err: unknown) {
+    console.error('Submission failed:', err);
+    if (typeof err === 'object' && err !== null && 'response' in err) {
+      const axiosErr = err as {
+        response?: { data?: { message?: string } };
+      };
+      setError(axiosErr.response?.data?.message || 'Submission failed.');
+    } else {
+      setError('Something went wrong.');
+    }
+  } finally {
+    setLoading(false);
   }
 };
+
   return (
     <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow w-full max-w-xl mx-auto">
       <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Add Student</h2>

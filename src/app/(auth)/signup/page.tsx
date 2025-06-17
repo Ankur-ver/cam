@@ -3,23 +3,25 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { AxiosError } from 'axios';
 import axios from 'axios';
 
-export default function signup(){
+export default function Signup(){
+   const router=useRouter();
  const [email,setemail]=useState('');
  const [name,setname]=useState('');
  const [password,setpassword]=useState('');
  const [role,setrole]=useState('student');
  const [error,seterror]=useState('');
- const router=useRouter();
 {/*Signup Handle */}
  const handleSignup=async(e:React.FormEvent)=>{
    e.preventDefault();
    try {
     await axios.post('http://localhost:5000/api/auth/signup',{email,password,name,role});
     router.push('/login');
-   } catch (err:any) {
-    seterror(err.response?.data?.message || 'signup failed');
+   } catch (err:unknown) {
+     const error = err as AxiosError<{ message?: string }>;
+      seterror(error.response?.data?.message || 'signup failed');
    }
  };
  {/*Signup UI */}

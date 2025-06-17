@@ -30,5 +30,8 @@ scheduleCFdatasync();
 
 app.use('/api/auth',authRoutes);
 app.use('/api/student',student)
+app.get('/',(req,res)=>{
+   res.send("Cozi API is woking fine..")
+})
 const PORT =process.env.PORT || 5000;
 app.listen(PORT,()=>console.log(`server running on port ${PORT}`));

@@ -56,7 +56,7 @@ export default function AdminDashboard() {
       s.maxRating ?? "N/A",
     ]);
 
-    let csvContent = "data:text/csv;charset=utf-8," + [headers, ...rows].map((e) => e.join(",")).join("\n");
+    const csvContent = "data:text/csv;charset=utf-8," + [headers, ...rows].map((e) => e.join(",")).join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.href = encodedUri;
